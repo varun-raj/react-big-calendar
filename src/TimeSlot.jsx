@@ -28,8 +28,8 @@ export default class TimeSlot extends Component {
           this.props.showLabel && 'rbc-label',
           this.props.isNow && 'rbc-now',
         )}
-      >
-      {this.props.events.map(function(event, i){
+      >          
+      {!this.props.showLabel && this.props.events.map(function(event, i){
         return (<div>
                 <div className='rbc-event-label'></div>
                 <div className='rbc-event-content'>
@@ -40,6 +40,7 @@ export default class TimeSlot extends Component {
                 </div>
               </div>)
       })}
+
       {this.props.showLabel &&
         <span>{this.props.content}
 
