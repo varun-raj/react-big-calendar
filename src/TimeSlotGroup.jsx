@@ -7,6 +7,7 @@ export default class TimeSlotGroup extends Component {
   static propTypes = {
     timeslots: PropTypes.number.isRequired,
     step: PropTypes.number.isRequired,
+    events: React.PropTypes.array.isRequired,
     value: PropTypes.instanceOf(Date).isRequired,
     showLabels: PropTypes.bool,
     isNow: PropTypes.bool,
@@ -14,8 +15,8 @@ export default class TimeSlotGroup extends Component {
     culture: PropTypes.string
   }
   static defaultProps = {
-    timeslots: 2,
-    step: 30,
+    timeslots: 1,
+    step: 60,
     isNow: false,
     showLabels: false
   }
@@ -27,7 +28,10 @@ export default class TimeSlotGroup extends Component {
                      content={content}
                      culture={this.props.culture}
                      isNow={this.props.isNow}
-                     value={value} />
+                     value={value}
+                     events={this.props.events}
+                     eventComponent={this.props.eventComponent}
+                     />
   }
 
   renderSlices() {

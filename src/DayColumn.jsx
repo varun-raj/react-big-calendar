@@ -112,7 +112,6 @@ let DaySlot = React.createClass({
         max={max}
         step={step}
       >
-        {this.renderEvents()}
         {
           selecting &&
           <div className='rbc-slot-selection' style={style}>

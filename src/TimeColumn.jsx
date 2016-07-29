@@ -15,17 +15,18 @@ export default class TimeColumn extends Component {
     showLabels: PropTypes.bool,
     timeGutterFormat: PropTypes.string,
     type: PropTypes.string.isRequired,
-    className: PropTypes.string
+    className: PropTypes.string,
+    events: React.PropTypes.array.isRequired,
   }
   static defaultProps = {
-    step: 30,
-    timeslots: 2,
+    step: 60,
+    timeslots: 1,
     showLabels: false,
     type: 'day',
     className: ''
   }
 
-  renderTimeSliceGroup(key, isNow, date) {
+  renderTimeSliceGroup(key, isNow, date, eves) {
     return (
       <TimeSlotGroup
         key={key}
@@ -35,6 +36,8 @@ export default class TimeColumn extends Component {
         showLabels={this.props.showLabels}
         timeGutterFormat={this.props.timeGutterFormat}
         value={date}
+        events={eves}
+        eventComponent={this.props.eventComponent}
       />
     )
   }
@@ -48,7 +51,7 @@ export default class TimeColumn extends Component {
     let date = this.props.min
     let next = date
     let isNow = false
-
+    let eves = [];
     for (var i = 0; i < numGroups; i++) {
       isNow = dates.inRange(
           this.props.now
@@ -57,8 +60,18 @@ export default class TimeColumn extends Component {
         , 'minutes'
       )
 
+      let end_time = new Date();
+      end_time = new Date(end_time.setTime(date.getTime() + (1*60*60*1000)));
+
+      if (this.props.events.length > 0) {
+        eves = this.props.events.filter(function (el) {
+                return el.start >= date &&
+                       el.start <= end_time
+              }.bind(this));
+      }      
+
       next = dates.add(date, groupLengthInMinutes, 'minutes');
-      timeslots.push(this.renderTimeSliceGroup(i, isNow, date))
+      timeslots.push(this.renderTimeSliceGroup(i, isNow, date, eves))
 
       date = next
     }

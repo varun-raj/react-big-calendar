@@ -7,7 +7,8 @@ export default class TimeSlot extends Component {
     isNow: PropTypes.bool,
     showLabel: PropTypes.bool,
     content: PropTypes.string,
-    culture: PropTypes.string
+    culture: PropTypes.string,
+    events: React.PropTypes.array.isRequired,
   }
 
   static defaultProps = {
@@ -15,8 +16,11 @@ export default class TimeSlot extends Component {
     showLabel: false,
     content: ''
   }
-
+  
   render() {
+
+    let EventComponent = this.props.eventComponent;
+
     return (
       <div
         className={cn(
@@ -25,8 +29,21 @@ export default class TimeSlot extends Component {
           this.props.isNow && 'rbc-now',
         )}
       >
+      {this.props.events.map(function(event, i){
+        return (<div>
+                <div className='rbc-event-label'></div>
+                <div className='rbc-event-content'>
+                  { EventComponent
+                    ? <EventComponent event={event} title={event.title}/>
+                    : event.title
+                  }
+                </div>
+              </div>)
+      })}
       {this.props.showLabel &&
-        <span>{this.props.content}</span>
+        <span>{this.props.content}
+
+        </span>
       }
       </div>
     )
