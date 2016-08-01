@@ -43,7 +43,12 @@ export default class TimeSlot extends Component {
               </div>)
       })}
       {!this.props.showLabel && this.props.events.length > 5 &&
-        <MoreEvents value={this.props.value}/>
+        <div>
+          <div className='rbc-event-label'></div>
+          <div className='rbc-event-content'>
+            <MoreEvents value={this.props.value}/>
+          </div>
+        </div>
       }
       {this.props.showLabel &&
         <span>{this.props.content}</span>
