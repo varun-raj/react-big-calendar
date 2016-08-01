@@ -144,6 +144,7 @@ export default class TimeGrid extends Component {
             style={{ width }}
             ref={gutterRef}
             className='rbc-time-gutter'
+            eventModalComponent={this.props.eventModalComponent}
           />
           {
             this.renderEvents(range, rangeEvents, this.props.now)
@@ -188,6 +189,7 @@ export default class TimeGrid extends Component {
     return levels.map((segs, idx) =>
       <EventRow
         eventComponent={this.props.components.event}
+        event_component={this.props.event_component}
         titleAccessor={this.props.titleAccessor}
         startAccessor={this.props.startAccessor}
         endAccessor={this.props.endAccessor}

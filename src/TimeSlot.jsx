@@ -1,4 +1,5 @@
-import React, { PropTypes, Component } from 'react'
+import React, { PropTypes, Component } from 'react';
+
 import cn from 'classnames'
 
 export default class TimeSlot extends Component {
@@ -20,6 +21,7 @@ export default class TimeSlot extends Component {
   render() {
 
     let EventComponent = this.props.eventComponent;
+    let MoreEvents = this.props.eventModalComponent;
 
     return (
       <div
@@ -34,17 +36,17 @@ export default class TimeSlot extends Component {
                 <div className='rbc-event-label'></div>
                 <div className='rbc-event-content'>
                   { EventComponent
-                    ? <EventComponent event={event} title={event.title}/>
+                    ? <EventComponent key={event.id} event={event} title={event.title}/>
                     : event.title
                   }
                 </div>
               </div>)
       })}
-
+      {!this.props.showLabel && this.props.events.length > 5 &&
+        <MoreEvents value={this.props.value}/>
+      }
       {this.props.showLabel &&
-        <span>{this.props.content}
-
-        </span>
+        <span>{this.props.content}</span>
       }
       </div>
     )

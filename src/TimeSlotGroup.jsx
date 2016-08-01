@@ -31,6 +31,7 @@ export default class TimeSlotGroup extends Component {
                      value={value}
                      events={this.props.events}
                      eventComponent={this.props.eventComponent}
+                     eventModalComponent={this.props.eventModalComponent}
                      />
   }
 

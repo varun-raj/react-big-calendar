@@ -38,6 +38,7 @@ export default class TimeColumn extends Component {
         value={date}
         events={eves}
         eventComponent={this.props.eventComponent}
+        eventModalComponent={this.props.eventModalComponent}
       />
     )
   }

@@ -416,6 +416,7 @@ let Calendar = React.createClass({
           events={events}
           date={current}
           components={viewComponents}
+          eventModalComponent={this.props.eventModalComponent}
           onNavigate={this._navigate}
           onHeaderClick={this._headerClick}
           onSelectEvent={this._select}
